@@ -1,20 +1,48 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PacketDotNet;
 
 namespace HomNetBridge.PacketProcessor
 {
+    public abstract class RuleAttribute : Attribute
+    {
+        public abstract bool Check(IPPacket packet);
+    }
+
     [AttributeUsage(AttributeTargets.Method)]
-    public class PacketProtocolAttribute : Attribute
+    public class ProtocolAttribute : RuleAttribute
+    {
+        public ProtocolType Value { get; }
+
+        public ProtocolAttribute(ProtocolType type)
+        {
+            Value = type;
+        }
+
+        public override bool Check(IPPacket packet)
+        {
+            return packet.Protocol == Value;
+        }
+
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class UrlParameterAttribute : RuleAttribute
     {
         public string Value { get; }
 
-        public PacketProtocolAttribute(string value)
+        public UrlParameterAttribute(string value)
         {
             Value = value;
         }
+
+        public override bool Check(IPPacket packet)
+        {
+            
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Method)]
+    public class HttpPacketAttribute : Attribute
+    {
     }
 
 
