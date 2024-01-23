@@ -8,7 +8,6 @@ namespace HomNetBridge.PacketProcessor
 {
     public static partial class Rules
     {
-        
         [StartsWith("")]
         public static void ElevatorCalled()
         {

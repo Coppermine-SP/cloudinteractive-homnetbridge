@@ -7,7 +7,7 @@ namespace HomNetBridge
     internal static class Logging
     {
         public static bool UseVerbose = false;
-        public static bool UseRaw = false;
+        public static bool UseDebug = false;
 
         public enum LogType { Raw = 0, Debug = 1, Info = 2, Warn = 3, Error = 4 }
 
@@ -22,8 +22,8 @@ namespace HomNetBridge
 
         public static void Print(string message, LogType type = LogType.Info)
         {
-            if (type == LogType.Debug && !UseVerbose) return;
-            if (type == LogType.Raw && !UseRaw) return;
+            if (type == LogType.Debug && !UseDebug) return;
+            if (type == LogType.Raw && !UseVerbose) return;
 
             var prefix = prefixes[(int)type];
 
