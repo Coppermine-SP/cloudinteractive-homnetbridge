@@ -90,12 +90,24 @@ namespace HomNetBridge.PacketProcessor
                 foreach (var rule in ruleMethods)
                 {
                     var attributes = rule.GetCustomAttributes();
+
+                    bool isCheckFailed = false;
                     foreach (var attribute in attributes)
                     {
-                        if (attribute is not RuleAttribute ruleAttribute) continue;
-                        if(!ruleAttribute.Check(packet)) continue;
+                        if (attribute is not RuleAttribute ruleAttribute)
+                        {
+                            isCheckFailed = true;
+                            break;
+                        }
+
+                        if (!ruleAttribute.Check(packet))
+                        {
+                            isCheckFailed = true;
+                            break;
+                        }
                     }
 
+                    if (isCheckFailed) continue;
                     rule.Invoke(null, new object[]{ packet });
                 }
 
