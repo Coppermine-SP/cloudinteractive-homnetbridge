@@ -1,4 +1,6 @@
-﻿using PacketDotNet;
+﻿using System.Collections.Specialized;
+using System.Web;
+using PacketDotNet;
 
 namespace HomNetBridge.PacketProcessor
 {
@@ -36,24 +38,37 @@ namespace HomNetBridge.PacketProcessor
 
         public override bool Check(IPPacket packet)
         {
-            return true;
+            if (packet.Protocol is ProtocolType.Udp or ProtocolType.Tcp)
+            {f));
+                return !String.IsNullOrWhiteSpace(parameters[Value]);
+            }
+            return false;
         }
     }
 
     [AttributeUsage(AttributeTargets.Method)]
-    public class HttpPacketAttribute : Attribute
+    public class HttpPacketAttribute : RuleAttribute
     {
+        public override bool Check(IPPacket packet)
+        {
+            return true;
+        }
     }
 
 
     [AttributeUsage(AttributeTargets.Method)]
-    public class StartsWithAttribute : Attribute
+    public class StartsWithAttribute : RuleAttribute
     {
         public string Value { get; }
 
         public StartsWithAttribute(string value)
         {
             Value = value;
+        }
+
+        public override bool Check(IPPacket packet)
+        {
+            return packet.PayloadToString().StartsWith(Value);
         }
     }
 
