@@ -20,7 +20,7 @@ namespace HomNetBridge
                     .AddJsonFile(path)
                     .Build();
 
-                Config = config.GetSection("HomNetBridgeConfig").Get<HomNetBridgeConfig>();
+                Config = config.GetSection("HomeNetBridgeConfig").Get<HomNetBridgeConfig>();
             }
             catch(Exception e)
             {
@@ -32,18 +32,18 @@ namespace HomNetBridge
 
     public class HomNetBridgeConfig
     {
-        public string CaptureInterfaceName;
-        public string CaptureFilter;
-        public int ReadTimeout;
+        public string CaptureInterfaceName { get; set; }
+        public string CaptureFilter { get; set; }
+        public int ReadTimeout { get; set; }
 
-        public bool ShowVerbose;
-        public bool ShowRaw;
+        public bool ShowVerbose { get; set; }
+        public bool ShowRaw { get; set; }
 
-        public string HAUrl;
-        public string HAKey;
+        public string HAUrl { get; set; }
+        public string HAKey { get; set; }
 
-        public int RefFloor;
-        public int NotifyUnit;
+        public int RefFloor { get; set; }
+        public int NotifyUnit { get; set; }
 
     }
 }
