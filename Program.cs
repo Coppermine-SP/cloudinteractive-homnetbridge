@@ -38,6 +38,12 @@ namespace HomNetBridge
             {
                 Logging.Print("Initialization Failed!", Logging.LogType.Error);
             }
+
+            while (true)
+            {
+                string input = Console.ReadLine();
+                if (input == "stop") return;
+            }
         }
     }
 }
