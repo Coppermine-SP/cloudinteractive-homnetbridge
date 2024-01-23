@@ -1,4 +1,6 @@
-﻿namespace HomNetBridge
+﻿using HomNetBridge.PacketProcessor;
+
+namespace HomNetBridge
 {
     internal class Program
     {
@@ -11,7 +13,26 @@
 
             try
             {
+                //Loading configurations and set verbose, raw mode.
                 Configuration.LoadConfig("config.json");
+
+                if (Configuration.Config.ShowVerbose)
+                {
+                    Logging.Print("Use verbose mode.");
+                    Logging.UseVerbose = true;
+                }
+
+                if (Configuration.Config.ShowRaw)
+                {
+                    Logging.Print("Show all packets in raw.", Logging.LogType.Warn);
+                    Logging.UseRaw = true;
+                }
+
+                //Init PacketCapture
+                PacketCapture.Init(Configuration.Config.CaptureInterfaceName,
+                    Configuration.Config.CaptureFilter, 
+                    Configuration.Config.ReadTimeout, 
+                    Configuration.Config.ShowRaw);
             }
             catch
             {

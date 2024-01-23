@@ -36,7 +36,7 @@ namespace HomNetBridge.PacketProcessor
 
         public override bool Check(IPPacket packet)
         {
-            
+            return true;
         }
     }
 
