@@ -1,4 +1,5 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Reflection;
+using System.Text.RegularExpressions;
 using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
 using PacketDotNet;
 using SharpPcap;
@@ -9,11 +10,29 @@ namespace HomNetBridge.PacketProcessor
     {
         private static ICaptureDevice captureDevice;
         private static bool showRaw;
+        private static MethodInfo[] ruleMethods;
+
         public static void Init(string captureInterfaceName, string captureFilter, int readTimeout, bool showRawPacket)
         {
             string interfaces = SharpPcap.CaptureDeviceList.Instance.Count.ToString();
             var instances = SharpPcap.CaptureDeviceList.Instance;
             showRaw = showRawPacket;
+
+            try
+            {
+                ruleMethods = typeof(Rules).GetMethods(BindingFlags.Public | BindingFlags.Static);
+                Logging.Print($"Found {ruleMethods.Length} Rules from HomNetBridge.PacketProcessor.Rules");
+
+                foreach (var rule in ruleMethods)
+                {
+                    Logging.Print($"Rule: {rule.Name}", Logging.LogType.Debug);
+                }
+            }
+            catch (Exception e)
+            {
+                Logging.Print("Cannot load rule methods: " + e.ToString(), Logging.LogType.Error);
+                throw new Exception();
+            }
 
             try
             {
@@ -57,6 +76,7 @@ namespace HomNetBridge.PacketProcessor
                     return;
                 }
 
+                //Show packet raw info
                 if (showRaw)
                 {
                     const string pattern = @"[\p{C}]|\t|[ ]{5,}";
@@ -67,7 +87,19 @@ namespace HomNetBridge.PacketProcessor
                     var length = packet.TotalPacketLength;
                     var content = Regex.Replace(packet.PayloadToString() ?? "(not-readable)", pattern, " ").Trim();
 
-                    Logging.Print($"{src} => {dst} ({protocol}, len={length}) :\n{content}", Logging.LogType.Raw);
+                    Logging.Print($" {src} => {dst} ({protocol}, len={length}) :\n{content}", Logging.LogType.Raw);
+                }
+
+                foreach (var rule in ruleMethods)
+                {
+                    var attributes = rule.GetCustomAttributes();
+                    foreach (var attribute in attributes)
+                    {
+                        if (attribute is not RuleAttribute) return;
+                        if(!((RuleAttribute)attribute).Check(packet)) return;
+                    }
+
+                    rule.Invoke(null, new object[]{ packet });
                 }
 
             }
