@@ -1,8 +1,7 @@
-﻿using System.Reflection;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
-using PacketDotNet;
+﻿using PacketDotNet;
 using SharpPcap;
+using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace HomNetBridge.PacketProcessor
 {
@@ -79,13 +78,11 @@ namespace HomNetBridge.PacketProcessor
                 //Show packet raw info
                 if (showRaw)
                 {
-                    const string pattern = @"[\p{C}]|\t|[ ]{5,}";
-
                     var protocol = packet.Protocol;
                     var src = packet.SourceAddress;
                     var dst = packet.DestinationAddress;
                     var length = packet.TotalPacketLength;
-                    var content = Regex.Replace(packet.PayloadToString() ?? "(not-readable)", pattern, " ").Trim();
+                    var content = packet.PayloadToString() ?? "(not-readable)";
 
                     Logging.Print($" {src} => {dst} ({protocol}, len={length}) :\n{content}", Logging.LogType.Raw);
                 }
@@ -95,8 +92,8 @@ namespace HomNetBridge.PacketProcessor
                     var attributes = rule.GetCustomAttributes();
                     foreach (var attribute in attributes)
                     {
-                        if (attribute is not RuleAttribute) return;
-                        if(!((RuleAttribute)attribute).Check(packet)) return;
+                        if (attribute is not RuleAttribute ruleAttribute) continue;
+                        if(!ruleAttribute.Check(packet)) continue;
                     }
 
                     rule.Invoke(null, new object[]{ packet });
