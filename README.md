@@ -37,7 +37,7 @@
 >**최신 버전의 Raspberry Pi OS는 아래 페이지에 있습니다.**
 >
 > https://www.raspberrypi.com/software/operating-systems/
-
+- - -
 **아래 명령어로 패키지를 최신 상태로 업데이트하고, wireshark, bridge-utils 패키지를 설치하십시오.**
 ```bash
 sudo apt update
@@ -45,11 +45,12 @@ sudo apt upgrade
 sudo apt install wireshark
 sudo apt install bridge-utils
 ```
+- - -
 **raspi-config에서 wlan0 인터페이스를 관리 인터페이스로 사용할 수 있도록 네트워크에 연결하고, SSH를 활성화 하십시오.**
 ```bash
 raspi-config
 ```
-
+- - -
 **Raspberry Pi에 브릿지에 사용할 2번째 네트워크 인터페이스 장치를 연결하고, ifconfig에서 올바르게 활성화되었는지 확인하십시오.**
 ```bash
 copperminesp@rpisrv:~ $ ifconfig
@@ -87,7 +88,7 @@ wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 ```
-
+- - -
 **/etc/network/interfaces/ 파일을 다음과 같이 수정하십시오.**
 ```bash
 sudo nano /etc/network/interfaces
@@ -102,13 +103,13 @@ iface eth1 inet manual
 iface br0 inet manual
 bridge_ports eth0 eth1
 ```
-
+- - -
 **아래 명령어로 브릿지 인터페이스를 생성하십시오.**
 ```bash
 sudo brctl addbr br0
 sudo brctl addif br0 eth0 eth1
 ```
-
+- - -
 **시스템을 재시작하고 br0 인터페이스가 올바르게 생성되었는지 확인하십시오.**
 ```bash
 sudo reboot
@@ -159,6 +160,7 @@ wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 ```bash
 wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.sh | sudo bash
 ```
+
 ## Run project
 
 **이 레포지토리를 Clone하여 Visual Studio 또는 .NET CLI에서 빌드하십시오.**
