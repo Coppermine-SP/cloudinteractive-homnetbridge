@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using PacketDotNet;
 using SharpPcap;
@@ -7,7 +8,7 @@ namespace HomNetBridge.PacketProcessor
 {
     public static class IPPacketExtension
     {
-        public static string? PayloadToString(this IPPacket packet)
+        public static string? PayloadToString(this IPPacket packet, bool useEucKr=false)
         {
             Packet extractedPacket;
             if (packet.Protocol == ProtocolType.Tcp) 
@@ -19,6 +20,10 @@ namespace HomNetBridge.PacketProcessor
             var payload = extractedPacket.PayloadData;
             if (payload is not null)
             {
+                if (useEucKr)
+                {
+                    return Encoding.GetEncoding(51949).GetString(payload).Trim();
+                }
                 return Encoding.UTF8.GetString(payload).Trim();
             }
             return null;

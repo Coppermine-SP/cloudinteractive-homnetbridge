@@ -1,6 +1,7 @@
 ﻿using PacketDotNet;
 using SharpPcap;
 using System.Reflection;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace HomNetBridge.PacketProcessor
@@ -13,6 +14,8 @@ namespace HomNetBridge.PacketProcessor
 
         public static void Init(string captureInterfaceName, string captureFilter, int readTimeout, bool showRawPacket)
         {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
             string interfaces = SharpPcap.CaptureDeviceList.Instance.Count.ToString();
             var instances = SharpPcap.CaptureDeviceList.Instance;
             showRaw = showRawPacket;
