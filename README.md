@@ -159,5 +159,5 @@ wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.sh | sudo bash
 ```
 ## Run project
-
+이 레포지토리를 Clone하여 Visual Studio 또는 .NET CLI에서 빌드하십시오.
 
