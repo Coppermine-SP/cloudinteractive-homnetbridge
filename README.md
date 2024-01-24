@@ -15,8 +15,8 @@
 - [Features](#features)
 - [Requirements](#requirements)
 - [Configure RPI for packet sniffing](#configure-rpi-for-packet-sniffing)
-- [Install .NET to RPI]()
-- [Run project]()
+- [Install .NET to RPI](#install-.net-to-rpi)
+- [Run project](#run-project)
 
 ## Features
 패킷 캡쳐를 통해 아래의 이벤트를 Home Assistant의 Push 알림을 통해 전달합니다: 
@@ -152,4 +152,12 @@ wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX packets 136072  bytes 32484026 (30.9 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
+
+## Install .NET to RPI
+아래 명령어로 설치 스크립트를 사용하여 .NET 7.0을 설치하십시오.
+```bash
+wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.sh | sudo bash
+```
+## Run project
+
 
