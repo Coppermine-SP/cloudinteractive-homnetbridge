@@ -20,13 +20,30 @@ namespace HomNetBridge.Services
             IsInited = true;
         }
 
-        public static void Notify(string title, string message)
+        public enum NotifyLevel {Active, TimeSensitive, Critical}
+        private static readonly string[] NotifyLevelString =
+        {
+            "active",
+            "time-sensitive",
+            "critical"
+        };
+
+        public static void Notify(string title, string message, NotifyLevel level = NotifyLevel.Active, string? tag = null)
         {
             Logging.Print($"NotifyService.Notify : {title} / {message}", Logging.LogType.Debug);
+
+            Dictionary<string, object> dataFields = new Dictionary<string, object>();
+            Dictionary<string, string> pushFields = new Dictionary<string, string>();
+
+            pushFields["interruption-level"] = NotifyLevelString[(int)level];
+            dataFields["push"] = pushFields;
+            if (tag is not null) dataFields["tag"] = tag;
+
             serviceClient.CallService("notify.notify", new
             {
                 title = title,
-                message = message
+                message = message,
+                data = dataFields
             });
         }
 
