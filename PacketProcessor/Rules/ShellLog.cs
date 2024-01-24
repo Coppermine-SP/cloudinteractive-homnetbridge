@@ -11,8 +11,9 @@ namespace HomNetBridge.PacketProcessor
         public static void ShellLog(IPPacket packet)
         {
             const string pattern = @"[\p{C}]|\t|[ ]{5,}";
+            string message = Regex.Replace(packet.PayloadToString(), pattern, " ").Trim();
 
-            Logging.Print(Regex.Replace(packet.PayloadToString(), pattern, " ").Trim(), Logging.LogType.Debug);
+            Logging.Print(message, Logging.LogType.Debug);
         }
     }
 }
