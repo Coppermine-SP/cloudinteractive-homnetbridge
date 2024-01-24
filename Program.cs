@@ -31,6 +31,9 @@ namespace HomNetBridge
                 //Init NotifyService
                 Services.NotifyService.Init(Configuration.Config.HAUrl,Configuration.Config.HAKey);
 
+                //Init ElevatorService
+                Services.ElevatorService.Init(Configuration.Config.RefFloor, Configuration.Config.NotifyUnit);
+
                 //Init PacketCapture
                 PacketCapture.Init(Configuration.Config.CaptureInterfaceName,
                     Configuration.Config.CaptureFilter, 
