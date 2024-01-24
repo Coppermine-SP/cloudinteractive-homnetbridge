@@ -14,7 +14,7 @@
 ### Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-- [Configure RPI for packet sniffing]()
+- [Configure RPI for packet sniffing](#configure-rpi-for-packet-sniffing)
 - [Install .NET to RPI]()
 - [Run project]()
 
@@ -29,3 +29,6 @@
 - Raspberry Pi (3B+ or better)
 - USB Network Adapter (Compatible with RPI)
 - Accessibility to CDB (세대통신단자함)
+
+## Configure RPI for packet sniffing
+Raspberry Pi에 최신 버전의 Raspberry Pi OS Lite를 설치하십시오.
