@@ -28,6 +28,9 @@ namespace HomNetBridge
                     Logging.UseRaw = true;
                 }
 
+                //Init NotifyService
+                Services.NotifyService.Init(Configuration.Config.HAUrl,Configuration.Config.HAKey);
+
                 //Init PacketCapture
                 PacketCapture.Init(Configuration.Config.CaptureInterfaceName,
                     Configuration.Config.CaptureFilter, 
