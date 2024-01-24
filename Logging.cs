@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using HomNetBridge.Services;
 
 namespace HomNetBridge
 {
@@ -44,6 +45,8 @@ namespace HomNetBridge
                 Console.ForegroundColor = ConsoleColor.DarkGray;
                 Console.Write($" [{className}.{method}]: ");
                 Console.ForegroundColor = ConsoleColor.Gray;
+
+                NotifyService.PushLog($"HomNetBrige::{className}.{method}", $"{prefix.Item2} {message}", type == LogType.Debug);
             }
 
             Console.WriteLine(message);
