@@ -15,7 +15,7 @@
 - [Features](#features)
 - [Requirements](#requirements)
 - [Configure RPI for packet sniffing](#configure-rpi-for-packet-sniffing)
-- [Install .NET to RPI](#install-.net-to-rpi)
+- [Install .NET to RPI](#install-net-to-rpi)
 - [Run project](#run-project)
 
 ## Features
@@ -152,12 +152,14 @@ wlan0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
         TX packets 136072  bytes 32484026 (30.9 MiB)
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
+**Raspberry PI를 CDB 내부에 설치하고, 홈넷 서버가 연결된 단지망 스위치와 월패드 사이에 브릿지되도록 이더넷 케이블을 연결하십시오.**
 
 ## Install .NET to RPI
-아래 명령어로 설치 스크립트를 사용하여 .NET 7.0을 설치하십시오.
+**아래 명령어로 설치 스크립트를 사용하여 .NET 7.0을 설치하십시오.**
 ```bash
 wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.sh | sudo bash
 ```
 ## Run project
-이 레포지토리를 Clone하여 Visual Studio 또는 .NET CLI에서 빌드하십시오.
+
+**이 레포지토리를 Clone하여 Visual Studio 또는 .NET CLI에서 빌드하십시오.**
 
