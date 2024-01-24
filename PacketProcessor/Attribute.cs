@@ -39,7 +39,8 @@ namespace HomNetBridge.PacketProcessor
         public override bool Check(IPPacket packet)
         {
             if (packet.Protocol is ProtocolType.Udp or ProtocolType.Tcp)
-            {f));
+            {
+                NameValueCollection parameters = HttpUtility.ParseQueryString(packet.PayloadToString());
                 return !String.IsNullOrWhiteSpace(parameters[Value]);
             }
             return false;
