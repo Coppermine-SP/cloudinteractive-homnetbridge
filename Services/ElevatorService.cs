@@ -34,6 +34,7 @@ namespace HomNetBridge.Services
         }
 
         private const string _notifyTitle = "엘리베이터 호출";
+        private const string _notifyTag = "elevator-service";
         private static object _updateLock = new object();
 
         private static int _currentFloor = 0;
@@ -84,7 +85,7 @@ namespace HomNetBridge.Services
                 _isNearCalled = false;
                 Logging.Print("Elevator arrived. reset all states.");
 
-                if(!forceCleanup) NotifyService.Notify(_notifyTitle, "엘리베이터가 도착했습니다.");
+                if(!forceCleanup) NotifyService.Notify(_notifyTitle, "엘리베이터가 도착했습니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
             }
         }
 
@@ -113,7 +114,7 @@ namespace HomNetBridge.Services
                     if (_isFirstUpdate)
                     {
                         Logging.Print("FirstUpdate notify push.");
-                        NotifyService.Notify(_notifyTitle, $"엘리베이터를 호출하였습니다. 현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.");
+                        NotifyService.Notify(_notifyTitle, $"엘리베이터를 호출하였습니다. 현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
                         _lastNotifyFloor = floorInt;
                         _isFirstUpdate = false;
                     }
@@ -132,9 +133,9 @@ namespace HomNetBridge.Services
                             Logging.Print($"Elevator expected arrival. arrival expected notify push.");
 
                             if (_currentDirection == ElevatorDirection.Down)
-                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 곧 도착합니다.");
+                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 곧 도착합니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
                             else
-                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 도착지 근처에 있습니다.");
+                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 도착지 근처에 있습니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
                             _isNearCalled = true;
                         }
                         else
