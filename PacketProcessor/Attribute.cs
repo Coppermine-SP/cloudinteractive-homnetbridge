@@ -74,13 +74,22 @@ namespace HomNetBridge.PacketProcessor
     }
 
     [AttributeUsage(AttributeTargets.Method)]
-    public class ContainsAttribute : Attribute
+    public class ContainsAttribute : RuleAttribute
     {
         public string Value { get; }
 
         public ContainsAttribute(string value)
         {
             Value = value;
+        }
+
+        public override bool Check(IPPacket packet)
+        {
+            if (packet.Protocol is ProtocolType.Udp or ProtocolType.Tcp)
+            {
+                return packet.PayloadToString().Contains(Value);
+            }
+            return false;
         }
     }
 
