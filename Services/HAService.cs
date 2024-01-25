@@ -8,10 +8,11 @@ using System.Threading.Tasks;
 
 namespace HomNetBridge.Services
 {
-    public static class NotifyService
+    public static class HAService
     {
         public static bool IsInited { get; private set; } = false;
         private static ServiceClient serviceClient;
+
         public static void Init(string endpoint, string key)
         {
             Logging.Print($"NotifyService Init... (endpoint={endpoint})");
@@ -56,6 +57,16 @@ namespace HomNetBridge.Services
                 level = isDebug ? "debug" : "info",
                 logger = logger,
                 message = message
+            });
+        }
+
+        public static void ChangeDoorBinarySensorState(bool state)
+        {
+            Logging.Print($"Change doorBinarySensor state = {state}.");
+            serviceClient.CallService("python_script.set_state", new
+            {
+                entity_id = "binary_sensor.homnet_front_door",
+                state = state ? "on" : "off"
             });
         }
     }

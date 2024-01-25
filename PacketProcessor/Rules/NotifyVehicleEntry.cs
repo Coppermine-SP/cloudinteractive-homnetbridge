@@ -19,7 +19,7 @@ namespace HomNetBridge.PacketProcessor
             string licenseNo = Util.GetUrlParameter("info", content);
             
             Logging.Print($"VehicleEntry: {licenseNo}");
-            NotifyService.Notify("차량 입차", $"{licenseNo} 차량이 입차했습니다.");
+            HAService.Notify("차량 입차", $"{licenseNo} 차량이 입차했습니다.");
         }
     }
 }

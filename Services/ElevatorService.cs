@@ -85,7 +85,7 @@ namespace HomNetBridge.Services
                 _isNearCalled = false;
                 Logging.Print("Elevator arrived. reset all states.");
 
-                if(!forceCleanup) NotifyService.Notify(_notifyTitle, "엘리베이터가 도착했습니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
+                if(!forceCleanup) HAService.Notify(_notifyTitle, "엘리베이터가 도착했습니다.", HAService.NotifyLevel.TimeSensitive, _notifyTag);
             }
         }
 
@@ -114,7 +114,7 @@ namespace HomNetBridge.Services
                     if (_isFirstUpdate)
                     {
                         Logging.Print("FirstUpdate notify push.");
-                        NotifyService.Notify(_notifyTitle, $"엘리베이터를 호출하였습니다. 현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
+                        HAService.Notify(_notifyTitle, $"엘리베이터를 호출하였습니다. 현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.", HAService.NotifyLevel.TimeSensitive, _notifyTag);
                         _lastNotifyFloor = floorInt;
                         _isFirstUpdate = false;
                     }
@@ -123,7 +123,7 @@ namespace HomNetBridge.Services
                         if (Math.Abs(_currentFloor - _lastNotifyFloor) >= _notifyThreshold)
                         {
                             Logging.Print($"notifyThreshold reached. floor notify push.(lastNotifyFloor={_lastNotifyFloor})");
-                            NotifyService.Notify(_notifyTitle, $"현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.");
+                            HAService.Notify(_notifyTitle, $"현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.");
                             _lastNotifyFloor = floorInt;
                         }
 
@@ -133,9 +133,9 @@ namespace HomNetBridge.Services
                             Logging.Print($"Elevator expected arrival. arrival expected notify push.");
 
                             if (_currentDirection == ElevatorDirection.Down)
-                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 곧 도착합니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
+                                HAService.Notify(_notifyTitle, $"엘리베이터가 곧 도착합니다.", HAService.NotifyLevel.TimeSensitive, _notifyTag);
                             else
-                                NotifyService.Notify(_notifyTitle, $"엘리베이터가 도착지 근처에 있습니다.", NotifyService.NotifyLevel.TimeSensitive, _notifyTag);
+                                HAService.Notify(_notifyTitle, $"엘리베이터가 도착지 근처에 있습니다.", HAService.NotifyLevel.TimeSensitive, _notifyTag);
                             _isNearCalled = true;
                         }
                         else

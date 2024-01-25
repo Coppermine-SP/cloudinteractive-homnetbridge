@@ -15,7 +15,7 @@ namespace HomNetBridge.PacketProcessor
         public static void NotifyLobbyOpen(IPPacket packet)
         {
             Logging.Print($"Lobby reqOpenDoor event detected in HBM REPORT!");
-            NotifyService.Notify("공동현관문", $"공동현관문 출입 요청을 승인했습니다.");
+            HAService.Notify("공동현관문", $"공동현관문 출입 요청을 승인했습니다.");
         }
     }
 }
