@@ -7,7 +7,7 @@ namespace HomNetBridge.PacketProcessor
     public static partial class Rules
     {
         [Protocol(ProtocolType.Udp)]
-        [Contains("CallType=TYPE_LOBBY,MsgType=evtRing")]
+        [Contains("CallType=TYPE_LOBBY, MsgType=evtRing")]
         public static void NotifyLobbyRing(IPPacket packet)
         {
             Logging.Print($"Lobby evtRing event detected in HBM REPORT!");

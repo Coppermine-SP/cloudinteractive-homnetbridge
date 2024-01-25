@@ -11,7 +11,7 @@ namespace HomNetBridge.PacketProcessor
     public static partial class Rules
     {
         [Protocol(ProtocolType.Udp)]
-        [Contains("CallType=TYPE_LOBBY,MsgType=reqOpenDoor")]
+        [Contains("CallType=TYPE_LOBBY, MsgType=reqOpenDoor")]
         public static void NotifyLobbyOpen(IPPacket packet)
         {
             Logging.Print($"Lobby reqOpenDoor event detected in HBM REPORT!");
