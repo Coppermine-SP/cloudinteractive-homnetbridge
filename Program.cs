@@ -44,8 +44,10 @@ namespace HomNetBridge
             catch
             {
                 Logging.Print("Initialization Failed!", Logging.LogType.Error);
+                return;
             }
 
+            Logging.Print("Type stop in console to exit.");
             while (true)
             {
                 string input = Console.ReadLine();
