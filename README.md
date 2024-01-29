@@ -167,3 +167,41 @@ wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.
 ```bash
 dotnet publish -r linux-arm64 -p:PublishSingleFile=true --self-contained true
 ```
+- - -
+**아래와 같이 config.json 파일을 구성하고 바이너리 파일 경로에 두십시오.**
+```json
+{
+  "HomeNetBridgeConfig": {
+
+    "CaptureInterfaceName": "br0",
+    "CaptureFilter": "not broadcast and not multicast and not icmp and not arp",
+    "ReadTimeout": 1500,
+
+    "ShowVerbose": true,
+    "ShowRaw": false,
+
+    "HAUrl": "http://172.10.0.12:5810",
+    "HAKey": "your-ha-key",
+    
+    "RefFloor": 15,
+    "NotifyUnit": 10
+  }
+}
+```
+|Option|Description|
+|---|---|
+|CaptureInterfaceName|캡쳐할 인터페이스를 지정합니다.|
+|CaptureFilter|캡쳐에 사용할 필터를 지정합니다.|
+|ReadTimeout|캡쳐 Timeout 시간을 지정합니다.|
+|ShowVerbose|Verbose 로그를 사용합니다.|
+|ShowRaw|캡쳐된 패킷을 RAW로 표시합니다.|
+|HAUrl|Home Assistant 서버 URL을 지정합니다.|
+|HAKey|Home Asssistant API 키를 지정합니다.|
+|RefFloor|기준 층을 지정합니다. (엘리베이터 도착 예측에 사용됨)|
+|NotifyUnit|엘리베이터가 몆층을 이동할때마다 푸시 알림을 보낼지 지정합니다.|
+- - -
+**직접 바이너리를 실행하거나, systemd service를 통해 실행하십시오**
+>[!WARNING]
+>**반드시 루트 권한을 통해 실행되어야 합니다.**
+>
+>이는 패킷 캡쳐가 루트 권한을 요구하기 때문입니다.
