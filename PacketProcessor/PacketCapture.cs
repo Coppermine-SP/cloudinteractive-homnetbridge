@@ -2,7 +2,6 @@
 using SharpPcap;
 using System.Reflection;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace HomNetBridge.PacketProcessor
 {

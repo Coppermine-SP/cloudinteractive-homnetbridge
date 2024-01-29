@@ -1,7 +1,6 @@
 ﻿using HomNetBridge.Services;
 using PacketDotNet;
 
-
 namespace HomNetBridge.PacketProcessor
 {
     public static partial class Rules

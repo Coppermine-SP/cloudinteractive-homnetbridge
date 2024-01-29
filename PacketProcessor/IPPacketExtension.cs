@@ -1,8 +1,5 @@
-﻿using System;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
+﻿using System.Text;
 using PacketDotNet;
-using SharpPcap;
 
 namespace HomNetBridge.PacketProcessor
 {
