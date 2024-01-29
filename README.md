@@ -203,4 +203,5 @@ dotnet publish -r linux-arm64 -p:PublishSingleFile=true --self-contained true
 **직접 바이너리를 실행하거나, systemd service를 통해 실행하십시오**
 >[!WARNING]
 >**반드시 루트 권한을 통해 실행되어야 합니다.**
+>
 >이는 패킷 캡쳐가 루트 권한을 요구하기 때문입니다.
