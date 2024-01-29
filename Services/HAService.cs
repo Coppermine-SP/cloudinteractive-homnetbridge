@@ -31,7 +31,7 @@ namespace HomNetBridge.Services
 
         public static void Notify(string title, string message, NotifyLevel level = NotifyLevel.Active, string? tag = null)
         {
-            Logging.Print($"NotifyService.Notify : {title} / {message}", Logging.LogType.Debug);
+            Logging.Print($"NotifyService.Notify : {title} / {message} (tag={tag ?? null}, level={NotifyLevelString[(int)level]}", Logging.LogType.Debug);
 
             Dictionary<string, object> dataFields = new Dictionary<string, object>();
             Dictionary<string, string> pushFields = new Dictionary<string, string>();

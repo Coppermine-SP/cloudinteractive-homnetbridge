@@ -32,15 +32,15 @@ namespace HomNetBridge
 
     public class HomNetBridgeConfig
     {
-        public string CaptureInterfaceName { get; set; }
-        public string CaptureFilter { get; set; }
+        public string? CaptureInterfaceName { get; set; }
+        public string? CaptureFilter { get; set; }
         public int ReadTimeout { get; set; }
 
         public bool ShowVerbose { get; set; }
         public bool ShowRaw { get; set; }
 
-        public string HAUrl { get; set; }
-        public string HAKey { get; set; }
+        public string? HAUrl { get; set; }
+        public string? HAKey { get; set; }
 
         public int RefFloor { get; set; }
         public int NotifyUnit { get; set; }
