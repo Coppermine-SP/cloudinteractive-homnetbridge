@@ -123,7 +123,7 @@ namespace HomNetBridge.Services
                         if (Math.Abs(_currentFloor - _lastNotifyFloor) >= _notifyThreshold)
                         {
                             Logging.Print($"notifyThreshold reached. floor notify push.(lastNotifyFloor={_lastNotifyFloor})");
-                            HAService.Notify(_notifyTitle, $"현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.");
+                            HAService.Notify(_notifyTitle, $"현재 {_getCurrentFloorString}{DirectionString[(int)_currentDirection]}.", HAService.NotifyLevel.TimeSensitive, _notifyTag));
                             _lastNotifyFloor = floorInt;
                         }
 
