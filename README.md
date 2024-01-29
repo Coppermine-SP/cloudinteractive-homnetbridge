@@ -164,4 +164,6 @@ wget -O - https://raw.githubusercontent.com/pjgpetecodes/dotnet7pi/main/install.
 ## Run project
 
 **이 레포지토리를 Clone하여 Visual Studio 또는 .NET CLI에서 빌드하십시오.**
-
+```bash
+dotnet publish -r linux-arm64 -p:PublishSingleFile=true --self-contained true
+```
