@@ -1,4 +1,10 @@
-# HomNetBridge
+# HomNetBridge [Deprecated]
+>[!WARNING]
+>**이 프로젝트는 Deprecated 되었습니다.**
+>
+>[HomNetBridge-2](https://github.com/Coppermine-SP/homnetbridge-2) 프로젝트로 모든 홈넷 관련 기능이 통합되었습니다.
+
+- - -
 이 프로젝트는 구형 LG HomNet 기반 스마트 홈 시스템의 서버, 월패드와 연결 된 네트워크의 패킷 캡쳐를 수행하여
 
 이를 통해 RS485 통신에서 얻을 수 없는 이벤트 (입차 알림, 공동현관문 알림, 엘리베이터, 에너지)를 Home Assistant를 통해 전파하는 프로젝트입니다.
